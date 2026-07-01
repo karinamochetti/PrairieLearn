@@ -43,29 +43,14 @@
             </span>
                 {{#parse_error}}
                     <span class="invalid-feedback d-block">
-                        <span class="badge text-bg-danger">
-                            Invalid 
-                            <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
-                        </span>
-                        <a 
-                            class="link-primary"
-                            tabindex="0"
-                            role="button"
-                            data-bs-placement="auto" 
-                            data-bs-toggle="popover"
-                            data-bs-html="true"
-                            title="Format error"
-                            data-bs-content="{{parse_error}}"
-                        >
-                            More info…
-                        </a>
+                        {{> ../partials/invalid_badge}}
                     </span>
                 {{/parse_error}}
         {{#inline}}</span>{{/inline}}
 {{/question}}
 
 {{#submission}}
-    {{#block}}<div>{{/block}}{{#inline}}<span class="d-inline-block">{{/inline}}
+    {{#inline}}<span class="d-inline-block">{{/inline}}
     {{#error}}
 
     <span>
@@ -73,23 +58,7 @@
         {{#raw_submitted_answer}}
             <code class="user-output-invalid">{{raw_submitted_answer}}</code>
         {{/raw_submitted_answer}}
-        <span class="small" style="white-space: nowrap">
-            <span class="badge text-bg-danger">
-                Invalid <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
-            </span>
-            <a
-                class="link-primary"
-                tabindex="0"
-                role="button"
-                data-bs-placement="auto"
-                data-bs-toggle="popover"
-                data-bs-html="true"
-                title="Format error"
-                data-bs-content="{{parse_error}}"
-            >
-            More info…
-            </a>
-        </span>
+        {{> ../partials/invalid_badge}}
     {{/parse_error}}
     {{#missing_input}}
         <span class="small" style="white-space: nowrap">
@@ -137,13 +106,11 @@
     {{#incorrect}}<span class="badge text-bg-danger"><i class="fas fa-times" aria-hidden="true"></i> 0%</span>{{/incorrect}}
     </div>
     {{/error}}
-    {{#inline}}</span>{{/inline}}{{#block}}</div>{{/block}}
+    {{#inline}}</span>{{/inline}}
 {{/submission}}
 
 {{#answer}}
-{{#block}}<div>{{/block}}{{#inline}}<span class="d-inline-block">{{/inline}}
 ${{type}}({{a_tru}})$
-{{#inline}}</span>{{/inline}}{{#block}}</div>{{/block}}
 {{/answer}}
 
 {{#format}}

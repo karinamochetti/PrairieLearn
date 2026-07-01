@@ -410,7 +410,7 @@ def render(element_html: str, data: pl.QuestionData) -> str:
 
         html_params = {
             "question": True,
-            "parse-error": data["format_errors"].get(answer_name, None),
+            "parse_error": data["format_errors"].get(answer_name, None),
             "submission_was_graded": submission_was_graded,
             "answer_name": answer_name,
             "source-header": order_blocks_options.source_header,
@@ -471,7 +471,7 @@ def render(element_html: str, data: pl.QuestionData) -> str:
 
         html_params = {
             "submission": True,
-            "parse-error": data["format_errors"].get(answer_name, None),
+            "parse_error": data["format_errors"].get(answer_name, None),
             "student_submission": student_submission,
             "feedback": feedback,
             "uuid": uuid,
@@ -521,12 +521,7 @@ def render(element_html: str, data: pl.QuestionData) -> str:
         else:
             ordering_message = "in the specified order"
         check_indentation = order_blocks_options.indentation
-        # Older generated variants may store None for omitted indent; normalize it
-        # to -1 so the answer panel does not show indentation as required.
-        required_indents = {
-            -1 if block["indent"] is None else block["indent"]
-            for block in correct_answers
-        }
+        required_indents = {block["indent"] for block in correct_answers}
         indentation_message = ""
         if check_indentation:
             if -1 not in required_indents:
@@ -712,13 +707,7 @@ def grade(element_html: str, data: pl.QuestionData) -> None:
         indentations = {ans["uuid"]: ans["indent"] for ans in true_answer_list}
         for ans in student_answer:
             indentation = indentations.get(ans["uuid"])
-            # Older generated variants may store None for omitted indent; treat it
-            # like -1 so indentation is not graded for that block.
-            if (
-                indentation is not None
-                and indentation != -1
-                and ans["indent"] != indentation
-            ):
+            if indentation != -1 and ans["indent"] != indentation:
                 if "tag" in ans:
                     ans["tag"] = None
                 else:

@@ -24,23 +24,7 @@ $(() => {
   {{/editable}}
   <div class="messages mt-3">
 {{#parse_error}}
-    <span class="small" style="white-space: nowrap">
-        <span class="badge text-bg-danger">
-            Invalid <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
-        </span>
-        <a
-            class="link-primary"
-            tabindex="0"
-            role="button"
-            data-bs-placement="auto"
-            data-bs-toggle="popover"
-            data-bs-html="true"
-            title="File error"
-            data-bs-content="{{.}}"
-        >
-           More info…
-        </a>
-    </span>
+  {{> ../partials/invalid_badge}}
 {{/parse_error}}
   </div>
   <div class="file-upload-status mt-3">
